@@ -32,7 +32,7 @@ function setupScene(scene) {
     updateChart();
 }
 }
-d3.csv('/data/aggregate_data.csv').then(data => {
+d3.csv('./data/aggregate_data.csv').then(data => {
     window.data = data;
 
     data.forEach(d => {
