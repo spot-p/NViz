@@ -143,14 +143,14 @@ function setupScene(scene) {
             .style('fill', 'steelblue')
             .style('opacity', 0.9);
 
-        const line = d3.line()
+        const line1 = d3.line()
             .x(d => xScale(d.TIME_PERIOD))
             .y(d => yScale(d.OBS_VALUE));
 
         svg.append('path')
             .datum(filteredData)
-            .attr('class', 'line tooltip-trigger')
-            .attr('d', line)
+            .attr('class', 'line1 tooltip-trigger')
+            .attr('d', line1)
             .style('stroke', 'steelblue')
             .on('mouseover mousemove', function (event, d) {
                    const mX = d3.pointer(event)[0];
@@ -202,7 +202,7 @@ function setupScene(scene) {
 
             svg.append('path')
                 .datum(filteredData2)
-                .attr('class', 'line tooltip-trigger')
+                .attr('class', 'line2 tooltip-trigger')
                 .attr('d', line2)
                 .style('stroke', 'green')
                 .on('mouseover mousemove', function (event, d) {
