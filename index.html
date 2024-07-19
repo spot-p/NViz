@@ -4,170 +4,14 @@
     <meta charset="UTF-8">
     <title>D3.js - Interactive World Obesity Visualization</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
-        .button {
-            display: inline-block;
-            padding: 6px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-right: 10px;
-        }
-        .button:hover {
-            background-color: #0056b3;
-        }
-        .container {
-        display: grid;
-       /* grid-template-columns: 200px 640px 200px;*/ /* column widths */
-        grid-template-columns: 23% 640px 22%;  /* column widths */
-        grid-template-rows: auto;
-        grid-row-gap: 1px;
-        grid-column-gap: 20px;
-        justify-content: center;
-        }
-
-        #control {
-            grid-column: 2 ;
-            text-align: center;
-            grid-row: 1;
-            margin-bottom: 2px;
-        }
-
-        .text-left {
-            grid-column: 1 ;
-            grid-row: 2 / 5;
-            text-align: justify;
-            font-size: 13px;
-            font-family: Copperplate, sans-serif;
-            fill: black;
-            padding-left: 20px;
-        }
-
-        .text-right {
-            grid-column: 3;
-            grid-row: 2 / 4;
-            text-align: justify;
-            font-size: 13px;
-            font-family: Copperplate, sans-serif;
-            fill: black;
-            padding-right: 20px;
-        }
-
-        .text-bottom {
-            grid-column: 2 ;
-            grid-row: 3;
-            text-align: center;
-            font-family: Copperplate, sans-serif;
-            font-size: 13px;
-            fill: black;
-            margin-bottom: 20px;
-        }
-
-        #chart {
-            grid-column: 2;
-            grid-row: 2/3;
-            position: relative;
-            width: 640px;
-            height: 400px;
-            background-image: url('./images/world_map_dot.jpg');
-            background-size: 100% 100%;
-            background-repeat: no-repeat;
-            overflow: hidden;
-        }
-        .axis text {
-            font-size: 12px;
-        }
-        .axis path,
-        .axis line {
-            fill: none;
-            stroke: #ccc;
-            shape-rendering: crispEdges;
-        }
-        .line1 {
-            fill: none;
-            stroke-width: 4px;
-        }
-        .line2 {
-            fill: none;
-            stroke-width: 4px;
-        }
-        .tooltip rect {
-            fill: skyblue;
-        }
-        .tooltip text {
-            font-size: 10px;
-            font-weight: bold;
-            text-anchor: right;
-        }
-        .annotation {
-            font-size: 12px;
-            font-weight: bold;
-            fill: black;
-        }
-        .label-y1 {
-            font-size: 12px;
-            font-weight: bold;
-            font-family: Copperplate, sans-serif;
-            fill: maroon;
-        }
-        .label-y2 {
-            font-size: 12px;
-            font-weight: bold;
-            font-family: Copperplate, sans-serif;
-            fill: maroon;
-        }
-        .title {
-            font-size: 12px;
-            font-weight: bold;
-            font-family: Copperplate, sans-serif;
-        }
-        .filter-label {
-            font-size: 12px;
-            font-weight: bold;
-            padding-left:5px;
-            fill: maroon;
-        }
-        .tooltip-trigger {
-            cursor: pointer;
-        }
-        .arrow-left {
-            width: 100%; /* Adjust size as needed */
-            height: 20px; /* Adjust size as needed */
-            position: relative;
-            background-color: #007bff; /* Adjust color */
-          }
-
-        .arrow-left::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: -20px; /* Tail length */
-            transform: translateY(-50%);
-            width: 0;
-            height: 0;
-            border-top: 10px solid transparent;
-            border-bottom: 10px solid transparent;
-            border-right: 20px solid #007bff; /* Same color as arrow */
-          }
-    </style>
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="shortcut icon" href="#">
 </head>
 <body>
     <div class="container">
         <div id="control">
-        <h1><strong>Obesity Epidemic</strong></h1>
-        <h3><strong>Obesity Has Tripled in Last 50 Years </strong></h3>
+        <h1 class="top"><strong>Obesity Epidemic</strong></h1>
+        <h3 class="top"><strong>Obesity Has Tripled in Last 50 Years </strong></h3>
 
 
         <div id="controls">
@@ -181,9 +25,9 @@
         </div>
         <div class="text-left" align="left">
             <p>
-                <strong>Global Obesity Rate </strong> has been continuosly rising for the past many decades, making it one of the most neglected health crises with serious implication for current and future generations. The rise can be partly attributed to economic productivity shifting to services globally as opposed to agriculture and manufacturing in the past, which has led to increased sedentary lifestyle. The rise in internet accessibility since the 1990's, which allowed internet based access to services and entertainment for the population has compounded the problem.
+                <strong>Global Obesity Rate </strong> Global Obesity Rate has had a constant rise for the past many decades,  and is one of the most neglected health crises with serious implications. This rise can partly be attributed to the gradual shift of economic productivity to services from agriculture and manufacturing, and to the rise of internet since the 1990's, which have contributed to a sedentary lifestyle. But the tight correlation between calorie consumption and obesity rate, and the rising calorie intake is puzzling.
             <br>
-                <strong> Alarmingly</strong> 1 in 5 adults globally are considered obese, unadjusted for population by using equal sample sizes from each country, and on average for the world population the number is about 1 in 8. Obesity has far reaching health consequences such as diabetes, hypertension, stroke, certain types of cancers and other chronic conditions.
+                <strong> Alarmingly</strong> 1 in 5 adults globally are considered obese, unadjusted for population, and on average for the world population the number is about 1 in 8. Obesity has far reaching health consequences such as diabetes, hypertension, stroke, certain types of cancers and other chronic conditions.
             <br>
             <strong>There is an urgent need </strong>to develop awareness campaigns, effective control programs with necessary policy changes. Failing to address the issue would create a heavy burden on public health systems, healthcare facilities and resources in the near future.
             </p>
@@ -192,7 +36,7 @@
         <div class="text-right">
             <br><br>
             <div class="arrow-left"></div>
-            <div class="text-r">
+            <div class="text-r top">
                 <p> <strong>Hover over the plot lines to learn more ! </strong></p>
             </div>
         </div>
