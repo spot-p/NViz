@@ -265,7 +265,7 @@ function setupScene(scene) {
 
       if (filteredData2.length > 0) {
         var categoryData2 = filteredData2[0].MEASURE;
-        var measureData2 = filteredData2[0].MEASURE_CAT;
+        var measureData2 = (filteredData2[0].MEASURE_CAT)==='Obese'?'Obesity Rate':filteredData2[0].MEASURE_CAT;
         const yScale2 = d3
           .scaleLinear()
           .domain(d3.extent(filteredData2, (d) => d.OBS_VALUE))
