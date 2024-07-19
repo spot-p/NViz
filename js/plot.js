@@ -148,6 +148,7 @@ function setupScene(scene) {
         d.OBS_VALUE = +d.OBS_VALUE;
       });
       const categoryData1 = filteredData[0].MEASURE;
+      const measureData1 = filteredData[0].MEASURE_CAT;
       const countryTag =
         filteredData2.length > 0
           ? filteredData2[0].COUNTRY
@@ -224,17 +225,18 @@ function setupScene(scene) {
         .style("stroke", "steelblue")
         .style("stroke-width", "4px")
         .style("opacity", 0);
-        const pathLength1 = path1.node().getTotalLength();
+      const pathLength1 = path1.node().getTotalLength();
 
-        path1.attr("stroke-dasharray", pathLength1 + " " + pathLength1)
-           .attr("stroke-dashoffset", pathLength1)
-           .style("opacity", 1)
-           .transition()
-           .duration(2000)
-           .ease(d3.easeSin)
-            .style("opacity", 1)
-            .style("stroke-width", "4px")
-            .attr("stroke-dashoffset", 0);
+      path1
+        .attr("stroke-dasharray", pathLength1 + " " + pathLength1)
+        .attr("stroke-dashoffset", pathLength1)
+        .style("opacity", 1)
+        .transition()
+        .duration(2000)
+        .ease(d3.easeSin)
+        .style("opacity", 1)
+        .style("stroke-width", "4px")
+        .attr("stroke-dashoffset", 0);
       svg
         .append("path")
         .datum(filteredData)
@@ -263,6 +265,7 @@ function setupScene(scene) {
 
       if (filteredData2.length > 0) {
         var categoryData2 = filteredData2[0].MEASURE;
+        var measureData2 = filteredData2[0].MEASURE_CAT;
         const yScale2 = d3
           .scaleLinear()
           .domain(d3.extent(filteredData2, (d) => d.OBS_VALUE))
@@ -284,16 +287,16 @@ function setupScene(scene) {
 
         const pathLength2 = path2.node().getTotalLength();
 
-        path2.attr("stroke-dasharray", pathLength2 + " " + pathLength2)
-           .attr("stroke-dashoffset", pathLength2)
-            .style("opacity", 1)
-           .transition()
-           .duration(2500)
-           .ease(d3.easeSin)
-            .style("stroke-width", "4px")
-            .style("opacity", 1)
-            .attr("stroke-dashoffset", 0);
-
+        path2
+          .attr("stroke-dasharray", pathLength2 + " " + pathLength2)
+          .attr("stroke-dashoffset", pathLength2)
+          .style("opacity", 1)
+          .transition()
+          .duration(2500)
+          .ease(d3.easeSin)
+          .style("stroke-width", "4px")
+          .style("opacity", 1)
+          .attr("stroke-dashoffset", 0);
 
         svg
           .append("path")
@@ -491,23 +494,23 @@ function setupScene(scene) {
         .attr("transform", "translate(100, 60)");
 
       svg
-        .append('text')
-        .attr('class','correlBox')
-        .attr('dy', '0.35em')
+        .append("text")
+        .attr("class", "correlBox")
+        .attr("dy", "0.35em")
         .attr("transform", "translate(100, 10)")
-        .attr('text-anchor', 'middle')
-        .text('Correlation');
+        .attr("text-anchor", "middle")
+        .text("Correlation");
 
       var textCorrel = svg.select(".correlBox").node();
-//      var boxCorrel = svg.select(".correl-box").node().getBBox();
+      //      var boxCorrel = svg.select(".correl-box").node().getBBox();
       var boxCorrel = textCorrel.getBBox();
 
       svg
         .insert("rect", ".correlBox")
-        .attr("x", boxCorrel.x+98)
-        .attr("y", boxCorrel.y+8)
-        .attr("width", boxCorrel.width+5)
-        .attr("height", boxCorrel.height+3)
+        .attr("x", boxCorrel.x + 98)
+        .attr("y", boxCorrel.y + 8)
+        .attr("width", boxCorrel.width + 5)
+        .attr("height", boxCorrel.height + 3)
         .style("fill", "grey")
         .style("opacity", 0.8);
 
@@ -530,7 +533,7 @@ function setupScene(scene) {
       // Correl Pie
       arcs
         .append("path")
-        .attr('class','correl-pie')
+        .attr("class", "correl-pie")
         .attr("d", arc)
         .attr("fill", "none")
         .transition()
@@ -551,10 +554,17 @@ function setupScene(scene) {
           const correlScore = d3.format(",.2~f")(correl * 100);
           div3.transition().duration(200).style("opacity", 0.9);
           div3
-            .html(`Correlation Score: ${correlScore} %`)
+            .html(
+              "Correlation Score: " +
+                correlScore +
+                "% <br>" +
+                measureData1 +
+                " v/s " +
+                measureData2
+            )
             .style("left", event.pageX + "px")
             .style("top", event.pageY - 28 + "px")
-            .style("background",pieColor);
+            .style("background", pieColor);
         })
         .on("mouseout", function (d) {
           div3.transition().duration(500).style("opacity", 0);
