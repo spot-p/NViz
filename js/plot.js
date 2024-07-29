@@ -1,3 +1,7 @@
+/* Credits: This code is adapted and inspired from the creators of d3 framework from their documentation
+and their examples available at d3js.org and observablehq.com for plots and animations.
+*/
+
 function setupScene(scene) {
   const existingSVG = d3.select("#chart svg");
 
